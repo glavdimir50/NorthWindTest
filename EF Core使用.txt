@@ -1,0 +1,4 @@
+1.將NorthWindTest.Entity設定為起始專案
+2.在套件管理器主控台(PM>)輸入下面指令執行
+Scaffold-DbContext "Data Source=.;Database=Northwind;Trusted_Connection=True;MultipleActiveResultSets=true" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Entity -Force
+3.輸出的檔案將會建立在-OutputDir後面名稱的資料夾內

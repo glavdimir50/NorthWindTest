@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NorthWindTest.Entity\NorthWindTest.Entity.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="MainBusiness\Classes\" />
+    <Folder Include="MainBusiness\Interfaces\" />
+  </ItemGroup>
+
+</Project>
