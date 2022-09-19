@@ -8,11 +8,11 @@ using System.Text;
 
 namespace NorthWindTest.Business.MainBusiness.Classes
 {
-    public class CustomerService : ICustomerService
+    public class CustomerDbService : ICustomerDbService
     {
         private IGenericRepository<Customers> _customersRepo;
 
-        public CustomerService(IServiceProvider provider)
+        public CustomerDbService(IServiceProvider provider)
         {
             _customersRepo = provider.GetRequiredService<IGenericRepository<Customers>>();
         }

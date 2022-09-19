@@ -5,7 +5,7 @@ using System.Text;
 
 namespace NorthWindTest.Business.MainBusiness.Interfaces
 {
-    public interface ICustomerService
+    public interface ICustomerDbService
     {
 
         /// <summary>
