@@ -1,12 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using NorthWindTest.Business.MainBusiness.Interfaces;
 using NorthWindTest.DataAccess.Interfaces;
 using NorthWindTest.Entity.Entity;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace NorthWindTest.Business.MainBusiness.Classes
+namespace NorthWindTest.DataAccess.Classes
 {
     public class CustomerDbService : ICustomerDbService
     {

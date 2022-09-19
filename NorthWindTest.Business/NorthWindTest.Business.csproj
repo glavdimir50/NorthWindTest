@@ -5,12 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\NorthWindTest.DataAccess\NorthWindTest.DataAccess.csproj" />
     <ProjectReference Include="..\NorthWindTest.Entity\NorthWindTest.Entity.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="MainBusiness\Classes\" />
-    <Folder Include="MainBusiness\Interfaces\" />
   </ItemGroup>
 
 </Project>
