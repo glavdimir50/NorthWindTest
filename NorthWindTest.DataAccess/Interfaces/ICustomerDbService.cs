@@ -1,9 +1,7 @@
 ﻿using NorthWindTest.Entity.Entity;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace NorthWindTest.Business.MainBusiness.Interfaces
+namespace NorthWindTest.DataAccess.Interfaces
 {
     public interface ICustomerDbService
     {
