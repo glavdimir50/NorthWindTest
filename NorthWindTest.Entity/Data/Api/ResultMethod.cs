@@ -1,23 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Threading.Tasks;
 
 namespace NorthWindTest.Entity.Data.Api
 {
-    public class ResultMethod
+    public static class ResultMethod
     {
         /// <summary>
         /// 成功
         /// </summary>
         /// <returns></returns>
-        public static Result<bool> Success()
+        public async static Task<Result<bool>> SuccessAsync()
         {
-            Result<bool> result = new Result<bool>();
-            result.OK = true;
-            result.Model = true;
-            result.ResponseCode = ResponseCode.Success;
-            result.Message = ResponseCodeDescription.GetMessage[ResponseCode.Success];
-            return result;
+            return await Task.Run(() =>
+            {
+                Result<bool> result = new Result<bool>();
+                result.OK = true;
+                result.Model = true;
+                result.ResponseCode = ResponseCode.Success;
+                result.Message = ResponseCodeDescription.GetMessage[ResponseCode.Success];
+                return result;
+            });
         }
 
         /// <summary>
@@ -26,14 +27,17 @@ namespace NorthWindTest.Entity.Data.Api
         /// <typeparam name="T"></typeparam>
         /// <param name="model"></param>
         /// <returns></returns>
-        public static Result<T> Success<T>(T model)
+        public async static Task<Result<T>> SuccessAsync<T>(T model)
         {
-            Result<T> result = new Result<T>();
-            result.OK = true;
-            result.Model = model;
-            result.ResponseCode = ResponseCode.Success;
-            result.Message = ResponseCodeDescription.GetMessage[ResponseCode.Success];
-            return result;
+            return await Task.Run(() =>
+            {
+                Result<T> result = new Result<T>();
+                result.OK = true;
+                result.Model = model;
+                result.ResponseCode = ResponseCode.Success;
+                result.Message = ResponseCodeDescription.GetMessage[ResponseCode.Success];
+                return result;
+            });
         }
 
         /// <summary>
@@ -41,14 +45,17 @@ namespace NorthWindTest.Entity.Data.Api
         /// </summary>
         /// <param name="errorCode"></param>
         /// <returns></returns>
-        public static Result<bool> Error(string errorCode)
+        public async static Task<Result<bool>> ErrorAsync(string errorCode)
         {
-            Result<bool> result = new Result<bool>();
-            result.OK = false;
-            result.Model = false;
-            result.ResponseCode = errorCode;
-            result.Message = ResponseCodeDescription.GetMessage[errorCode];
-            return result;
+            return await Task.Run(() =>
+            {
+                Result<bool> result = new Result<bool>();
+                result.OK = false;
+                result.Model = false;
+                result.ResponseCode = errorCode;
+                result.Message = ResponseCodeDescription.GetMessage[errorCode];
+                return result;
+            });
         }
 
         /// <summary>
@@ -57,13 +64,16 @@ namespace NorthWindTest.Entity.Data.Api
         /// <typeparam name="T"></typeparam>
         /// <param name="errorCode"></param>
         /// <returns></returns>
-        public static Result<T> Error<T>(string errorCode)
+        public async static Task<Result<T>> ErrorAsync<T>(string errorCode)
         {
-            Result<T> result = new Result<T>();
-            result.OK = false;
-            result.ResponseCode = errorCode;
-            result.Message = ResponseCodeDescription.GetMessage[errorCode];
-            return result;
+            return await Task.Run(() =>
+            {
+                Result<T> result = new Result<T>();
+                result.OK = false;
+                result.ResponseCode = errorCode;
+                result.Message = ResponseCodeDescription.GetMessage[errorCode];
+                return result;
+            });
         }
     }
 }
