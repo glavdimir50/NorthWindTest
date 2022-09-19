@@ -1,5 +1,6 @@
 ﻿using NorthWindTest.Entity.Entity;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace NorthWindTest.DataAccess.Interfaces
 {
@@ -12,6 +13,11 @@ namespace NorthWindTest.DataAccess.Interfaces
         /// <returns></returns>
         IEnumerable<Customers> GetCustomers();
 
+        /// <summary>
+        /// 搜尋全部客戶-字典
+        /// </summary>
+        /// <returns></returns>
+        Task<Dictionary<string, string>> GetCustomersDictionaryAsync();
         /// <summary>
         /// 根據客戶ID搜尋
         /// </summary>

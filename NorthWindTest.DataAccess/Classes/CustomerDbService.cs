@@ -3,16 +3,20 @@ using NorthWindTest.DataAccess.Interfaces;
 using NorthWindTest.Entity.Entity;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace NorthWindTest.DataAccess.Classes
 {
     public class CustomerDbService : ICustomerDbService
     {
-        private IGenericRepository<Customers> _customersRepo;
+        //private IGenericRepository<Customers> _customersRepo;
+        private DbSet<Customers> _context;
 
         public CustomerDbService(IServiceProvider provider)
         {
-            _customersRepo = provider.GetRequiredService<IGenericRepository<Customers>>();
+            _context = provider.GetRequiredService<NorthwindContext>().Customers;
         }
 
         /// <summary>
@@ -21,7 +25,16 @@ namespace NorthWindTest.DataAccess.Classes
         /// <returns></returns>
         public IEnumerable<Customers> GetCustomers()
         {
-            return _customersRepo.Filter();
+            return _context;
+        }
+
+        /// <summary>
+        /// 搜尋全部客戶-字典
+        /// </summary>
+        /// <returns></returns>
+        public async Task<Dictionary<string,string>> GetCustomersDictionaryAsync()
+        {
+            return await _context.ToDictionaryAsync(x=>x.CustomerId, x=>x.CompanyName);
         }
 
         /// <summary>
@@ -31,7 +44,7 @@ namespace NorthWindTest.DataAccess.Classes
         /// <returns></returns>
         public IEnumerable<Customers> GetCustomersById(string Id)
         {
-            return _customersRepo.Filter(x=>x.CustomerId == Id);
+            return _context.Where(x=>x.CustomerId == Id);
         }
 
         /// <summary>
@@ -41,7 +54,7 @@ namespace NorthWindTest.DataAccess.Classes
         /// <returns></returns>
         public IEnumerable<Customers> GetCustomersByCity(string City)
         {
-            return _customersRepo.Filter(x=>x.City == City);
+            return _context.Where(x=>x.City == City);
         }
     }
 }
