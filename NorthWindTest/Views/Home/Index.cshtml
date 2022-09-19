@@ -1,5 +1,27 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿<div>
+    <div>
+        <select id="select-customers" name="select-customers"></select>
+    </div>
+
+</div>
+                    
+
+
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            initCustomersList();
+        });
+        function initCustomersList() {
+            var successHandler = function (response) {
+                const customersList = JSON.parse(response.model.customersList);
+                Select.GeneralSelect($("#select-customers"), customersList);
+            }
+
+            Ajax.Request(
+                "@Url.Action("GetCustomers","Home")", null, successHandler, null, "post"
+            );
+        }
+    </script>
 }
