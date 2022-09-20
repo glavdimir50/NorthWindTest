@@ -12,14 +12,20 @@ namespace NorthWindTest.Web.Extensions
     {
         public static IServiceCollection AddService(this IServiceCollection services, IWebHostEnvironment env)
         {
-            #region CustomersDBService
+            #region CustomersDbService
             services.AddScoped<ICustomerDbService, CustomerDbService>();
             services.AddScoped<IGenericRepository<Customers>, GenericRepository<Customers>>();
+            #endregion
+
+            #region OrdersDbService
+            services.AddScoped<IOrderDbService, OrderDbService>();
+            services.AddScoped<IGenericRepository<Orders>, GenericRepository<Orders>>();
             #endregion
 
             #region Home
             services.AddTransient<ICustomerService, CustomerService>();
             #endregion
+
             return services;
         }
     }
