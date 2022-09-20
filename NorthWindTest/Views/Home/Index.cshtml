@@ -3,15 +3,27 @@
 	Layout = "_Layout";
 }
 
+@section Styles {
+	<style>
+     .table-responsive {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+			 }
+	</style>
+}
+
 <main>
 	<div class="my-3">
 		<h3>客戶列表選單</h3>
 	</div>
 
 	<div>
+		<h4>請選擇：</h4>
 		<select id="select-customers" name="select-customers"></select>
 	</div>
-
+	<div class="my-4 table-responsive">
+		<table id="query-result" class="table table-bordered table-striped w-100" cellspacing="0"></table>
+	</div>
 </main>
 
 
@@ -22,6 +34,7 @@
 		$(document).ready(function() {
 			initCustomersList();
 		});
+
 		function initCustomersList() {
 			var successHandler = function(response) {
 				const customersList = JSON.parse(response.model.customersList);
@@ -31,6 +44,62 @@
 			Ajax.Request(
 				"@Url.Action("GetCustomers","Home")", null, successHandler, null, "post"
 			);
+		}
+
+		$("#select-customers").on('change', function () {
+            var selectedCustomer = $(this).val();
+			$("#table-content").hide();
+            showDataTable(selectedCustomer);
+        })
+
+		function showDataTable(customer) {
+			$("#table-content").show();
+
+            $('#query-result').DataTable({
+				processing: true,
+				paging: true,
+				destroy: true,
+				searching: false,
+				ordering: false,
+				serverSide: true,
+				length: 10,
+                language: {
+                    "processing": "DataTables is currently busy",
+                    "emptyTable": "No data available in table",
+                    "search": "Search:",
+                    "lengthMenu": "Show _MENU_ entries",
+                    "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+                    "infoEmpty": "Showing 0 to 0 of 0 entries",
+                    "infoFiltered": "(filtered from _MAX_ total entries)",
+                    "zeroRecords": "No matching records found",
+                    "loadingRecords": "Loading...",
+                    "paginate": {
+                        "first": "First",
+                        "last": "Last",
+                        "next": "Next",
+                        "previous": "Previous"
+                    },
+                },
+				columns: [
+                    { "title": "訂單編號", "name": "OrderID", "data":"OrderID", "autoWidth": true },
+                    { "title": "訂單日期", "name": "OrderDate", "data": "OrderDate","autoWidth": true },
+                    { "title": "到貨日期", "name": "RequiredDate", "data": "RequiredDate","autoWidth": true },
+                    { "title": "出貨日期", "name": "ShippedDate","data": "ShippedDate", "autoWidth": true },
+                ],
+                ajax: {
+					method:"POST",
+                    data: function(data) {
+						 data.Id = customer
+					},
+					url: "@Url.Action("GetOrderList","Order")",
+					dataType:'json',
+                    dataSrc: function(jsonString) {
+						console.log(jsonString)
+						var jsonData = JSON.parse(jsonString.data);
+						return jsonData;
+					}
+				}
+			}).ajax.reload();
 		}
 	</script>
 }
