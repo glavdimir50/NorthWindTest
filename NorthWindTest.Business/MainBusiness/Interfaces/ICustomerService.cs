@@ -6,6 +6,6 @@ namespace NorthWindTest.Business.MainBusiness.Interfaces
 {
     public interface ICustomerService
     {
-        Task<Result<CustomersListRespVM>> GetCustomersList();
+        Task<Result<CustomersListRespVM>> GetCustomersListAsync();
     }
 }

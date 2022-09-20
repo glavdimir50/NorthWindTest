@@ -20,7 +20,7 @@ namespace NorthWindTest.Business.MainBusiness.Classes
             _customerDbService = provider.GetRequiredService<ICustomerDbService>();
         }
 
-        public async Task<Result<CustomersListRespVM>> GetCustomersList()
+        public async Task<Result<CustomersListRespVM>> GetCustomersListAsync()
         {
             var customersDictionary = await _customerDbService.GetCustomersDictionaryAsync();
             CustomersListRespVM vm = new CustomersListRespVM();

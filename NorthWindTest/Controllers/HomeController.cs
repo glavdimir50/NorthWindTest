@@ -9,10 +9,12 @@ namespace NorthWindTest.Web.Controllers
     public class HomeController : Controller
     {
         private readonly ICustomerService _customerService;
+
         public HomeController(IServiceProvider provider)
         {
             _customerService = provider.GetRequiredService<ICustomerService>();
         }
+
         public IActionResult Index()
         {
             return View();
@@ -21,7 +23,7 @@ namespace NorthWindTest.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> GetCustomers()
         {
-            var result = await _customerService.GetCustomersList();
+            var result = await _customerService.GetCustomersListAsync();
             return Json(result);
         }
     }
