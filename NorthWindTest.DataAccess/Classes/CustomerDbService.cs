@@ -11,7 +11,6 @@ namespace NorthWindTest.DataAccess.Classes
 {
     public class CustomerDbService : ICustomerDbService
     {
-        //private IGenericRepository<Customers> _customersRepo;
         private DbSet<Customers> _context;
 
         public CustomerDbService(IServiceProvider provider)
