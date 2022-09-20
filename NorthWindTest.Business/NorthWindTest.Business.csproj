@@ -11,6 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\NorthWindTest.DataAccess\NorthWindTest.DataAccess.csproj" />
     <ProjectReference Include="..\NorthWindTest.Entity\NorthWindTest.Entity.csproj" />
+    <ProjectReference Include="..\NorthWindTest.Helper\NorthWindTest.Helper.csproj" />
   </ItemGroup>
 
 </Project>
