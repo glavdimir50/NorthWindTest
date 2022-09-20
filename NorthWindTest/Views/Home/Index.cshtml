@@ -1,27 +1,36 @@
-﻿<div>
-    <div>
-        <select id="select-customers" name="select-customers"></select>
-    </div>
+﻿@{
+	ViewBag.Title = "首頁";
+	Layout = "_Layout";
+}
 
-</div>
-                    
+<main>
+	<div class="my-3">
+		<h3>客戶列表選單</h3>
+	</div>
+
+	<div>
+		<select id="select-customers" name="select-customers"></select>
+	</div>
+
+</main>
+
 
 
 
 @section Scripts {
-    <script>
-        $(document).ready(function () {
-            initCustomersList();
-        });
-        function initCustomersList() {
-            var successHandler = function (response) {
-                const customersList = JSON.parse(response.model.customersList);
-                Select.GeneralSelect($("#select-customers"), customersList);
-            }
+	<script>
+		$(document).ready(function() {
+			initCustomersList();
+		});
+		function initCustomersList() {
+			var successHandler = function(response) {
+				const customersList = JSON.parse(response.model.customersList);
+				Select.GeneralSelect($("#select-customers"), customersList);
+			}
 
-            Ajax.Request(
-                "@Url.Action("GetCustomers","Home")", null, successHandler, null, "post"
-            );
-        }
-    </script>
+			Ajax.Request(
+				"@Url.Action("GetCustomers","Home")", null, successHandler, null, "post"
+			);
+		}
+	</script>
 }
