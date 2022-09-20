@@ -17,11 +17,6 @@ namespace NorthWindTest.Web.Controllers
             _orderService = provider.GetRequiredService<IOrderService>();
         }
 
-        public IActionResult OrderQuery()
-        {
-            return View();
-        }
-
         [HttpPost]
         public async Task<IActionResult> GetOrderList(DataTableReqVM dtvm, GetOrderReqVM vm)
         {
